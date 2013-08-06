@@ -73,8 +73,6 @@
 		return (haystack.indexOf(needle) >= 0);
 	};
 
-	window.util = util;
-
 	//Set up notice DOM container
 	notice_base = document.createElement("ul");
 	notice_base.id = "notice-base";
@@ -90,9 +88,9 @@
 		root.ele = document.createElement("li");
 		root.ele.className = "notice-item " + root.options.type;
 		root.ele.id = root.options.id === undefined ? util.str_rand(5) : root.options.id;
-		root.ele.onclick = function noticeItemClickFn(){
+		root.ele.onclick = function noticeItemClickFn() {
 			var defined_click = root.options.onclick();
-			if(defined_click !== false){
+			if (defined_click !== false) {
 				root.remove();
 			}
 		}
@@ -104,10 +102,10 @@
 			root.ele.innerHTML = text;
 		}
 
-		if(root.options.timeout > 0){
-			root.timerID = setTimeout(function(){
+		if (root.options.timeout > 0) {
+			root.timerID = setTimeout(function() {
 				root.remove();
-				if(root.options.ontimeout !== null){
+				if (root.options.ontimeout !== null) {
 					root.options.ontimeout();
 				}
 			}, root.options.timeout);
@@ -117,7 +115,7 @@
 
 		return this;
 	};
-	notice.prototype.updateText = function updateTextFn(text){
+	notice.prototype.updateText = function updateTextFn(text) {
 		var root = this;
 
 		if (root.options.safe) {
@@ -128,21 +126,21 @@
 
 		return this;
 	};
-	notice.prototype.cancelTimeout = function cancelTimeoutFn(){
+	notice.prototype.cancelTimeout = function cancelTimeoutFn() {
 		var root = this;
-		if(root.timerID){
+		if (root.timerID) {
 			window.clearTimeout(root.timerID);
 		}
 		return this;
 	};
-	notice.prototype.remove = function removeFn(){
+	notice.prototype.remove = function removeFn() {
 		var root = this;
 
-		if(root.options.animate) {
-			$(root.ele).fadeOut(400, function(){
+		if (root.options.animate) {
+			jQuery(root.ele).fadeOut(400, function() {
 				root.ele.remove();
 			});
-		}else{
+		} else {
 			root.ele.remove();
 		}
 
@@ -154,8 +152,8 @@
 		autoshow: true,
 		safe: false,
 		type: 'alert',
-		timeout: 1000,
-		onclick: function(){},
+		timeout: 5000,
+		onclick: function() {},
 		ontimeout: null
 	};
 
