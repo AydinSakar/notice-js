@@ -9,7 +9,7 @@
 		root.notice = factory();
 	}
 }(this, function(){
-	var util = {};
+	var util = {}, notice;
 
 	util.str_rand = function str_randFn(length, set){
 		var sets, text = "", alpha, num, possible, i;
@@ -40,6 +40,36 @@
 		return text;
 	};
 
-	return function notice(text, options){
-	};
+	/**
+	 * util.extend - extend objects
+	 * @param  {Object} dest     - An object that will be merged with sources. Properties in destination will be overwritten
+	 *                             by source objects.
+	 * @param  {Object} sources* - (optional) Objects to be merged with destination, sources will overwrite properties in 
+	 *                             destination.
+	 *                             
+	 * @return {Object}          - The finalized and merged object
+	 */
+	util.extend = function extendFn(dest){
+		var args = Array.prototype.slice.call(arguments);
+		args.slice(1).forEach(function(val, index, source){
+			if(val){
+				for (var prop in val){
+					dest[prop] = val[prop];
+				}
+			}
+		});
+
+		return dest;
+	}
+
+	window.util = util;
+
+	notice = function notice_constructor(text, options){
+
+	}
+
+	notice.defaults = "hello";
+
+
+	return notice;
 }));
