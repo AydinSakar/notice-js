@@ -56,14 +56,77 @@ var mynotice = new notice('My even cooler notice', {
 * **onclick** `Function`
     A function that will be run when the notice automatically hides itself.
 
+### Methods
+Each instance gets its own methods, so don't go running these on the global `notice` object.
 
-This is the recommended CSS to go with it:
+#### mynotice.updateText( text )
+Update the text on an existing notice
+* text `String` The new text. The input will obey the original `safe` setting.
+
+#### mynotice.cancelTimeout()
+If a notice is set to dissapear automatically, this method will keep it from doing that.
+
+#### mynotice.remove()
+Removes the notice from the DOM
+
+
+CSS Quickstart
+==============
+This is the recommended CSS to start with:
 ```css
-ul.notice-base {
+ul#notice-base {
+	z-index: -2147483647;
 	position: fixed;
 	top: 0;
 	width: 100%;
 	padding: 20px;
 	list-style: none;
+}
+ul#notice-base li.notice-item {
+	line-height: 1em;
+	cursor: pointer;
+	display: table;
+	margin-bottom: 10px;
+	min-width: 220px;
+	max-width: 320px;
+	padding: 10px;
+	border-radius: 3px;
+	color: white;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+ul#notice-base li.notice-item h1,
+ul#notice-base li.notice-item h2,
+ul#notice-base li.notice-item h3,
+ul#notice-base li.notice-item h4,
+ul#notice-base li.notice-item h5,
+ul#notice-base li.notice-item h6 {
+	color: white;
+	margin: 0px;
+	margin-bottom: 3px;
+}
+ul#notice-base li.notice-item p:last-child,
+ul#notice-base li.notice-item p:only-child {
+	margin-bottom: 0px;
+}
+ul#notice-base li.notice-item.alert {
+	border-left-color: #7f8c8d;
+	background-color: #95a5a6;
+}
+ul#notice-base li.notice-item.success {
+	background-color: #2ecc71;
+	border-left-color: #27ae60;
+}
+ul#notice-base li.notice-item.error {
+	border-left-color: #c0392b;
+	background-color: #e74c3c;
+}
+ul#notice-base li.notice-item.warn {
+	background-color: #f1c40f;
+	border-left-color: #f39c12;
+}
+ul#notice-base li.notice-item.info {
+	background-color: #3498db;
+	border-left-color: #2980b9;
 }
 ```
