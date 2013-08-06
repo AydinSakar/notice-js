@@ -1,17 +1,31 @@
 notice.js
 =========
 
-A very bare-bones notification tool.
+A bare-bones notification tool.
 ```javascript
 new notice('Howdy, Folks!');
 ```
 
-A very bare-bones notification tool that lets completely leaves the styleing up to the developer. After looking for a few hours for the perfect notification library, all of them are really hard to implement custom styles. So this is my notification tool that focuses on easy implmentation as far as integrating it into any UI.
-
-This is the foundation of `notice.js`. It uses a `ul` so multiple notifications can appear at once, this is the element that will always remain attached to the `body` element:
-```html
-<ul class="notice-base"></ul>
+Getting Started
+===============
+notice.js supports AMD (RequireJS) if that is your style.
+```javascript
+define(['notice'], function(){
+	new notice('I love RequireJS');
+});
 ```
+
+Or if you want to just throw it right into the DOM like a savage, you are welcome to do that too.
+```html
+<script src="notice.js"></script>
+<script>
+	new notice('Guten Tag!');
+</script>
+```
+
+Usage
+=====
+
 
 This is the recommended CSS to go with it:
 ```css
