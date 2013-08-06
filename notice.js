@@ -90,16 +90,76 @@
 		root.ele = document.createElement("li");
 		root.ele.className = "notice-item " + root.options.type;
 		root.ele.id = root.options.id === undefined ? util.str_rand(5) : root.options.id;
+		root.ele.onclick = function noticeItemClickFn(){
+			var defined_click = root.options.onclick();
+			if(defined_click !== false){
+				root.remove();
+			}
+		}
 
-		console.log(root.ele);
+
+		if (root.options.safe) {
+			root.ele.textContent = text;
+		} else {
+			root.ele.innerHTML = text;
+		}
+
+		if(root.options.timeout > 0){
+			root.timerID = setTimeout(function(){
+				root.remove();
+				if(root.options.ontimeout !== null){
+					root.options.ontimeout();
+				}
+			}, root.options.timeout);
+		}
+
+		notice_base.appendChild(root.ele);
+
+		return this;
+	};
+	notice.prototype.updateText = function updateTextFn(text){
+		var root = this;
+
+		if (root.options.safe) {
+			root.ele.textContent = text;
+		} else {
+			root.ele.innerHTML = text;
+		}
+
+		return this;
+	};
+	notice.prototype.cancelTimeout = function cancelTimeoutFn(){
+		var root = this;
+		if(root.timerID){
+			window.clearTimeout(root.timerID);
+		}
+		return this;
+	};
+	notice.prototype.remove = function removeFn(){
+		var root = this;
+
+		if(root.options.animate) {
+			$(root.ele).fadeOut(400, function(){
+				root.ele.remove();
+			});
+		}else{
+			root.ele.remove();
+		}
+
+		return this;
 	};
 
 	notice.defaults = {
 		animate: (window.jQuery) ? true : false,
+		autoshow: true,
 		safe: false,
-		type: 'alert'
+		type: 'alert',
+		timeout: 1000,
+		onclick: function(){},
+		ontimeout: null
 	};
 
+	notice.VERSION = '0.0.1';
 
 	return notice;
 }));
