@@ -72,7 +72,7 @@ Removes the notice from the DOM
 
 CSS Quickstart
 ==============
-This is the recommended CSS to start with:
+notice.js is made to be easy to style. That being said, this is some recommended CSS to start with:
 ```css
 ul#notice-base {
 	z-index: -2147483647;
