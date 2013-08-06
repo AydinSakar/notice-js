@@ -9,7 +9,7 @@
 		root.notice = factory();
 	}
 }(this, function() {
-	var util = {}, notice;
+	var util = {}, notice, notice_base;
 
 	/**
 	 * util.str_rand - generate random strings
@@ -63,13 +63,42 @@
 		return dest;
 	};
 
-	window.util = util;
-
-	notice = function notice_constructor(text, options) {
-
+	/**
+	 * util.contains - check for existence of array element
+	 * @param  {Mixed} needle    - The data being searched for.
+	 * @param  {Array} haystack  - The array being searched.
+	 * @return {Boolean}         - A boolean indicating if the needle is present or not
+	 */
+	util.contains = function containsFn(needle, haystack) {
+		return (haystack.indexOf(needle) >= 0);
 	};
 
-	notice.defaults = "hello";
+	window.util = util;
+
+	//Set up notice DOM container
+	notice_base = document.createElement("ul");
+	notice_base.id = "notice-base";
+	document.body.appendChild(notice_base);
+
+
+	notice = function notice_instance(text, options) {
+		var root = this;
+		root.options = options === undefined ? notice.defaults : util.extend(notice.defaults, options);
+
+		root.options.type = (util.contains(root.options.type, ['alert', 'success', 'error', 'warn', 'info', 'confirm'])) ? root.options.type : 'alert';
+
+		root.ele = document.createElement("li");
+		root.ele.className = "notice-item " + root.options.type;
+		root.ele.id = root.options.id === undefined ? util.str_rand(5) : root.options.id;
+
+		console.log(root.ele);
+	};
+
+	notice.defaults = {
+		animate: (window.jQuery) ? true : false,
+		safe: false,
+		type: 'alert'
+	};
 
 
 	return notice;
