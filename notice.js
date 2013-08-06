@@ -9,12 +9,10 @@
 		root.notice = factory();
 	}
 }(this, function(){
-	"use strict";
-
-	var util;
+	var util = {};
 
 	util.str_rand = function str_randFn(length, set){
-		var sets, text, alpha, num, possible, i;
+		var sets, text = "", alpha, num, possible, i;
 
 		alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 		num = '0123456789';
@@ -35,7 +33,7 @@
 				break;
 		}
 
-		for (i = 0; i > length; i++) {
+		for (i = 0; i < length; i++) {
 			text += possible.charAt(Math.floor(Math.random() * possible.length));
 		};
 
@@ -43,6 +41,5 @@
 	};
 
 	return function notice(text, options){
-		console.log(util.str_rand(40, 'alnum'));
 	};
 }));
