@@ -5,6 +5,9 @@ A bare-bones notification tool.
 ```javascript
 new notice('Howdy, Folks!');
 ```
+The resulting notice:
+
+![A notice example](notice.png)
 
 Getting Started
 ===============
